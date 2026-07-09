@@ -1,0 +1,493 @@
+/* ==========================================================
+   CREATE MATCH PAGE
+========================================================== */
+
+.event-page{
+    max-width:1400px;
+    margin:auto;
+}
+
+.event-form{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.event-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:34px;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(135deg,#18273f 0%,#101827 100%);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+.event-header::before{
+
+    content:"";
+
+    position:absolute;
+
+    right:-80px;
+    top:-80px;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:rgba(79,111,255,.15);
+
+    filter:blur(20px);
+}
+
+.event-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:rgba(79,111,255,.12);
+
+    color:#7ea4ff;
+
+    font-size:.8rem;
+
+    font-weight:600;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+
+    margin-bottom:18px;
+}
+
+.event-title{
+
+    color:#fff;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+.event-subtitle{
+
+    color:#9caec9;
+
+    max-width:620px;
+
+    line-height:1.7;
+}
+/* ==========================================================
+   CARDS
+========================================================== */
+
+.event-card{
+
+    background:#121c2d;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:22px;
+
+    padding:34px;
+
+    transition:.25s;
+}
+
+.event-card:hover{
+
+    border-color:#3559c7;
+
+    transform:translateY(-3px);
+}
+
+.card-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    margin-bottom:28px;
+}
+
+.card-icon{
+
+    width:54px;
+
+    height:54px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#4f6fff,#7c3aed);
+
+    color:white;
+}
+
+.card-title h3{
+
+    color:white;
+
+    font-size:1.2rem;
+
+    margin-bottom:4px;
+}
+
+.card-title span{
+
+    color:#94a3b8;
+
+    font-size:.9rem;
+}
+/* ==========================================================
+   GRID
+========================================================== */
+
+.event-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:24px;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.form-group.full{
+
+    grid-column:1/-1;
+}
+
+.form-group label{
+
+    color:#d8e3f3;
+
+    font-size:.92rem;
+
+    font-weight:600;
+}
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    height:54px;
+
+    padding:0 18px;
+
+    border-radius:14px;
+
+    background:#182538;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#fff;
+
+    font-size:.95rem;
+
+    transition:.25s;
+}
+
+.form-group input::placeholder{
+
+    color:#7084a3;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    outline:none;
+
+    border-color:#4f6fff;
+
+    box-shadow:
+        0 0 0 4px rgba(79,111,255,.12);
+}
+
+.form-group select{
+
+    cursor:pointer;
+
+    appearance:none;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='white'%3E%3Cpath d='M5 7l4 4 4-4'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 16px center;
+}
+
+.input-with-icon{
+
+    position:relative;
+}
+
+.input-with-icon i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#7c8da7;
+}
+
+.input-with-icon input{
+
+    padding-left:48px;
+}
+/* ==========================================================
+   TEAM SECTION
+========================================================== */
+
+.team-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:28px;
+}
+
+.team-card{
+
+    background:#121c2d;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    transition:.3s;
+}
+
+.team-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#3559c7;
+}
+
+.team-card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:24px;
+}
+
+.team-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+}
+
+.team-icon{
+
+    width:52px;
+
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#4f6fff,#7c3aed);
+
+    color:white;
+}
+
+.team-title h3{
+
+    color:white;
+
+    font-size:1.1rem;
+
+    margin-bottom:4px;
+}
+
+.team-title span{
+
+    color:#8ea2c1;
+
+    font-size:.85rem;
+}
+
+.team-badge{
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    background:#2141a8;
+
+    color:white;
+
+    font-size:.75rem;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+}
+
+.team-badge.away{
+
+    background:#d9485f;
+}
+/* ==========================================================
+   LOGO UPLOAD
+========================================================== */
+
+.logo-upload{
+
+    display:block;
+
+    margin-bottom:24px;
+
+    cursor:pointer;
+}
+
+.upload-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    height:170px;
+
+    border:2px dashed rgba(255,255,255,.12);
+
+    border-radius:18px;
+
+    background:#182538;
+
+    transition:.25s;
+}
+
+.upload-box:hover{
+
+    border-color:#4f6fff;
+
+    background:#1d2c45;
+}
+
+.upload-box i{
+
+    width:58px;
+
+    height:58px;
+
+    color:#6b8cff;
+}
+
+.upload-box strong{
+
+    color:white;
+
+    font-size:1rem;
+}
+
+.upload-box span{
+
+    color:#8ea2c1;
+
+    font-size:.85rem;
+}
+/* ==========================================================
+   COLOR PICKER
+========================================================== */
+
+.color-input{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+}
+
+.color-picker{
+
+    width:58px !important;
+
+    height:58px !important;
+
+    padding:0 !important;
+
+    border:none !important;
+
+    background:none !important;
+
+    cursor:pointer;
+}
+
+.color-input span{
+
+    color:#b7c7df;
+
+    font-weight:600;
+}

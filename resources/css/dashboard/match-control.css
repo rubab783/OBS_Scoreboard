@@ -1,0 +1,522 @@
+/* ===========================================
+   MATCH CONTROL PAGE
+=========================================== */
+
+.control-panel-wrapper{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+    padding:8px;
+}
+
+/* ===========================================
+   HEADER
+=========================================== */
+
+.control-panel-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+    padding:26px 32px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    background:linear-gradient(145deg,#18243b,#111827);
+    box-shadow:0 12px 40px rgba(0,0,0,.28);
+}
+
+.page-title{
+    margin:0;
+    font-size:2rem;
+    font-weight:700;
+    color:#fff;
+    letter-spacing:-.5px;
+}
+
+.page-subtitle{
+    margin-top:8px;
+    color:#94a3b8;
+    font-size:.95rem;
+}
+
+.match-status-badge{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 18px;
+    border-radius:999px;
+    font-weight:600;
+    font-size:.9rem;
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#22c55e;
+    animation:pulse 1.8s infinite;
+}
+
+.status-live{
+    background:rgba(34,197,94,.12);
+    color:#22c55e;
+}
+
+.status-paused{
+    background:rgba(234,179,8,.12);
+    color:#facc15;
+}
+
+.status-ended{
+    background:rgba(239,68,68,.12);
+    color:#ef4444;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+opacity:1;
+}
+
+50%{
+transform:scale(1.4);
+opacity:.45;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+/* ===========================================
+GRID
+=========================================== */
+
+.control-grid{
+    display:grid;
+    grid-template-columns:1fr 420px 1fr;
+    gap:24px;
+}
+
+/* ===========================================
+CARDS
+=========================================== */
+
+.glass-card{
+    background:linear-gradient(160deg,#172233,#101826);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:24px;
+    box-shadow:0 14px 40px rgba(0,0,0,.30);
+}
+
+/* ===========================================
+TEAM
+=========================================== */
+
+.team-control-card{
+    padding:28px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:24px;
+}
+
+.team-control-header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+}
+
+.team-control-logo{
+    width:90px;
+    height:90px;
+    border-radius:22px;
+    object-fit:cover;
+    border:3px solid var(--team-color);
+}
+
+.team-control-logo-fallback{
+    width:90px;
+    height:90px;
+    display:grid;
+    place-items:center;
+    border-radius:22px;
+    background:rgba(255,255,255,.05);
+    color:var(--team-color);
+}
+
+.team-control-name{
+    margin:0;
+    color:white;
+    font-size:1.35rem;
+    font-weight:700;
+}
+
+.score-display{
+
+    width:170px;
+    height:170px;
+
+    border-radius:32px;
+
+    background:linear-gradient(
+        135deg,
+        var(--team-color),
+        color-mix(in srgb,var(--team-color),black 35%)
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:4.5rem;
+    font-weight:800;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.28);
+
+}
+
+.score-controls{
+    display:flex;
+    gap:18px;
+}
+
+.score-btn{
+
+    width:58px;
+    height:58px;
+
+    border:none;
+    border-radius:18px;
+
+    background:#1f2937;
+    color:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.score-btn:hover{
+
+    background:var(--team-color);
+
+    transform:translateY(-4px);
+
+}
+
+/* ===========================================
+TIMER
+=========================================== */
+
+.timer-control-card{
+
+    padding:32px;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:26px;
+
+    justify-content:center;
+
+}
+
+.timer-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.timer-label{
+
+font-size:.9rem;
+
+color:#94a3b8;
+
+font-weight:600;
+
+}
+
+.timer-status{
+
+padding:6px 14px;
+
+background:#1f2937;
+
+border-radius:999px;
+
+color:#22c55e;
+
+font-size:.8rem;
+
+}
+
+.timer-display{
+
+font-size:4.2rem;
+
+font-weight:800;
+
+letter-spacing:3px;
+
+color:white;
+
+text-align:center;
+
+font-family:monospace;
+
+}
+
+.timer-controls{
+
+display:flex;
+
+justify-content:center;
+
+gap:16px;
+
+}
+
+.timer-btn{
+
+width:58px;
+
+height:58px;
+
+border:none;
+
+border-radius:18px;
+
+background:#1e293b;
+
+color:white;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.timer-btn:hover{
+
+background:#2563eb;
+
+transform:translateY(-4px);
+
+}
+
+.timer-btn-reset:hover{
+
+background:#ef4444;
+
+}
+
+.period-selector{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+.period-label{
+
+color:#cbd5e1;
+
+font-weight:600;
+
+}
+
+.period-select{
+
+height:50px;
+
+border:none;
+
+border-radius:14px;
+
+padding:0 16px;
+
+background:#0f172a;
+
+color:white;
+
+}
+
+.match-status-controls{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+}
+
+.status-btn{
+
+height:48px;
+
+border:none;
+
+border-radius:14px;
+
+background:#1e293b;
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.status-btn:hover{
+
+background:#2563eb;
+
+}
+
+/* ===========================================
+SYNC
+=========================================== */
+
+.sync-status-card{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:22px 28px;
+
+}
+
+.sync-status-info{
+
+display:flex;
+
+align-items:center;
+
+gap:16px;
+
+}
+
+.sync-icon{
+
+width:50px;
+
+height:50px;
+
+border-radius:16px;
+
+display:grid;
+
+place-items:center;
+
+background:#1e293b;
+
+color:#3b82f6;
+
+}
+
+.sync-label{
+
+display:block;
+
+font-size:.8rem;
+
+color:#94a3b8;
+
+margin-bottom:4px;
+
+}
+
+.sync-meta{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+color:#94a3b8;
+
+}
+
+.sync-dot{
+
+width:10px;
+
+height:10px;
+
+border-radius:50%;
+
+background:#22c55e;
+
+animation:pulse 1.8s infinite;
+
+}
+
+/* ===========================================
+RESPONSIVE
+=========================================== */
+
+@media(max-width:1200px){
+
+.control-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.control-panel-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+}
+
+.score-display{
+
+width:130px;
+height:130px;
+font-size:3.2rem;
+
+}
+
+.timer-display{
+
+font-size:3rem;
+
+}
+
+.match-status-controls{
+
+grid-template-columns:1fr;
+
+}
+
+}

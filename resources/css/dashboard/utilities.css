@@ -1,0 +1,65 @@
+.glass{
+
+    background:rgba(255,255,255,.03);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+}
+
+.panel{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow);
+
+}
+
+.section{
+
+    margin-bottom:32px;
+
+}
+
+.flex{
+
+    display:flex;
+
+}
+
+.items-center{
+
+    align-items:center;
+
+}
+
+.justify-between{
+
+    justify-content:space-between;
+
+}
+
+.gap-8{
+
+    gap:8px;
+
+}
+
+.gap-16{
+
+    gap:16px;
+
+}
+
+.gap-24{
+
+    gap:24px;
+
+}

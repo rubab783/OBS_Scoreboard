@@ -1,0 +1,509 @@
+/* ==========================================================
+   DASHBOARD BODY
+========================================================== */
+
+.dashboard-body{
+    min-height:100vh;
+    color:var(--text);
+    min-height:100vh;
+
+    background:
+        radial-gradient(circle at top left,#4f46e515 0%,transparent 30%),
+        radial-gradient(circle at top right,#2563eb10 0%,transparent 35%),
+        linear-gradient(180deg,#090d18 0%,#0b1120 50%,#070b14 100%);
+}
+
+
+/* ==========================================================
+   LAYOUT
+========================================================== */
+
+.dash-app{
+    min-height:100vh;
+    position:relative;
+}
+
+.dash-shell{
+    display:flex;
+    min-height:100vh;
+}
+
+.dash-main{
+    flex:1;
+    min-width:0;
+    padding:36px 40px 60px;
+}
+/* ==========================================================================
+   Overlay Template Wizard
+   ========================================================================== */
+
+.wizard-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wizard-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.wizard-progress-bar {
+    flex: 1;
+    max-width: 320px;
+    height: 4px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.wizard-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7C3AED, #2563EB);
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+}
+
+.wizard-progress-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.wizard-step-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #7C3AED;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+/* ==========================================================================
+   Overlay Config — Match Picker
+   ========================================================================== */
+
+.overlay-picker-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.overlay-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.overlay-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.overlay-empty-state i {
+    width: 40px;
+    height: 40px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.overlay-empty-state h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+
+.overlay-empty-state p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.overlay-match-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+}
+
+.overlay-match-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+}
+
+.overlay-match-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(124, 58, 237, 0.4);
+}
+
+.overlay-match-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.overlay-live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.overlay-live-pill i {
+    width: 12px;
+    height: 12px;
+}
+
+.overlay-match-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f3f4f6;
+}
+
+.overlay-match-teams {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.overlay-match-vs {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+.overlay-match-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.overlay-theme-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.overlay-theme-tag i {
+    width: 14px;
+    height: 14px;
+    color: #7C3AED;
+}
+
+.overlay-match-footer > i {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Overlay Config — Settings Form
+   ========================================================================== */
+
+.overlay-config-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.overlay-config-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.overlay-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    margin-bottom: 0.75rem;
+    transition: color 0.15s ease;
+}
+
+.overlay-back-link:hover {
+    color: #f3f4f6;
+}
+
+.overlay-back-link i {
+    width: 14px;
+    height: 14px;
+}
+
+.overlay-live-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
+}
+
+.overlay-live-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #f3f4f6;
+}
+
+.overlay-live-label i {
+    width: 16px;
+    height: 16px;
+    color: #7C3AED;
+}
+
+/* Standalone JS-driven toggle (Live On Air) */
+
+.toggle-switch {
+    position: relative;
+    width: 46px;
+    height: 26px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease;
+}
+
+.toggle-switch .toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    transition: transform 0.2s ease;
+}
+
+.toggle-switch.toggle-on {
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    border-color: transparent;
+}
+
+.toggle-switch.toggle-on .toggle-knob {
+    transform: translateX(20px);
+}
+
+/* Form-bound checkbox toggle (visibility fields) — same visual, different markup */
+
+.toggle-switch-input {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.toggle-switch-input input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-switch-visual {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.2s ease;
+}
+
+.toggle-switch-visual::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f3f4f6;
+    transition: transform 0.2s ease;
+}
+
+.toggle-switch-input input:checked + .toggle-switch-visual {
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    border-color: transparent;
+}
+
+.toggle-switch-input input:checked + .toggle-switch-visual::before {
+    transform: translateX(20px);
+}
+
+/* ==========================================================================
+   Match Control Panel
+   ========================================================================== */
+
+.control-panel-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.control-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.match-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6b7280;
+}
+
+.match-status-badge.status-live .status-dot {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.7);
+    animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+.match-status-badge.status-scheduled .status-dot {
+    background: #f59e0b;
+}
+
+.match-status-badge.status-paused .status-dot {
+    background: #f59e0b;
+}
+
+.match-status-badge.status-ended .status-dot {
+    background: #6b7280;
+}
+/*=====================================
+    EVENT FOOTER
+======================================*/
+
+.event-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    padding:28px;
+
+    border-radius:24px;
+
+    background:#171b2d;
+
+    border:1px solid rgba(255,255,255,.06);
+
+}
+
+
+.btn-secondary{
+
+    padding:14px 26px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#aab4d2;
+
+    transition:.25s;
+
+}
+
+.btn-secondary:hover{
+
+    background:rgba(255,255,255,.05);
+
+}
+
+.btn-primary-large{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:16px 34px;
+
+    border-radius:16px;
+
+    background:linear-gradient(135deg,#4d7fff,#735cff);
+
+    color:#fff;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    transition:.25s;
+
+    box-shadow:0 15px 40px rgba(77,127,255,.30);
+
+}
+
+.btn-primary-large:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 18px 45px rgba(77,127,255,.45);
+
+}
+

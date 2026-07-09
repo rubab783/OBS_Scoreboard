@@ -1,0 +1,506 @@
+/* ==========================================================================
+   ScoreCastPro — Overlay / Broadcast Graphics Theme
+   Standalone stylesheet for OBS Browser Source pages.
+   Transparent background required — do not add a body background here.
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.overlay-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   Scoreboard Bar
+   ========================================================================== */
+
+.scoreboard-bar {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: stretch;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    min-width: 640px;
+}
+
+.scoreboard-team {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--team-color, #7C3AED), color-mix(in srgb, var(--team-color, #7C3AED) 60%, #000));
+}
+
+.scoreboard-team-a {
+    flex-direction: row;
+}
+
+.scoreboard-team-b {
+    flex-direction: row-reverse;
+}
+
+.scoreboard-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.scoreboard-team-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+.scoreboard-score {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    min-width: 36px;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.scoreboard-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 10px 28px;
+    background: rgba(10, 10, 15, 0.92);
+    min-width: 120px;
+}
+
+.scoreboard-timer {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+}
+
+.scoreboard-timer[data-status="running"] {
+    color: #34d399;
+}
+
+.scoreboard-timer[data-status="paused"] {
+    color: #f59e0b;
+}
+
+.scoreboard-period {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   Sponsor Corner
+   ========================================================================== */
+
+.sponsor-corner {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    padding: 10px 16px;
+    background: rgba(10, 10, 15, 0.75);
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+}
+
+.sponsor-logo {
+    max-height: 40px;
+    max-width: 160px;
+    object-fit: contain;
+    display: block;
+}
+
+/* ==========================================================================
+   Ticker
+   ========================================================================== */
+
+.ticker-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(90deg, var(--accent-color, #7C3AED), color-mix(in srgb, var(--accent-color, #7C3AED) 50%, #000));
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-track {
+    display: flex;
+    white-space: nowrap;
+    animation: tickerScroll 18s linear infinite;
+}
+
+.ticker-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    padding-right: 80px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   Entrance Animations (driven by data-animation on <body>)
+   ========================================================================== */
+
+body[data-animation="fade"] .scoreboard-bar {
+    animation: overlayFadeIn 0.6s ease both;
+}
+
+body[data-animation="slide"] .scoreboard-bar {
+    animation: overlaySlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes overlaySlideIn {
+    from { opacity: 0; transform: translate(-50%, 40px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ==========================================================================
+   Theme Variants
+   ========================================================================== */
+
+body.theme-minimal .scoreboard-bar {
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+body.theme-minimal .scoreboard-team {
+    background: rgba(15, 15, 20, 0.85);
+}
+
+body.theme-minimal .scoreboard-center {
+    background: rgba(15, 15, 20, 0.85);
+}
+
+body.theme-broadcast-bold .scoreboard-bar {
+    min-width: 760px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+body.theme-broadcast-bold .scoreboard-team-name {
+    font-size: 1.3rem;
+}
+
+body.theme-broadcast-bold .scoreboard-score {
+    font-size: 2.1rem;
+}
+.copy-btn-success {
+    border-color: #34d399 !important;
+    color: #34d399 !important;
+}
+
+.copy-btn-error {
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+}
+/* ==========================================================================
+   Overlay Config — Visual Redesign
+   ========================================================================== */
+
+.overlay-hero {
+    position: relative;
+    padding: 2rem 2rem 1.5rem;
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(37, 99, 235, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.overlay-hero-glow {
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.35), transparent 70%);
+    pointer-events: none;
+}
+
+.overlay-hero-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.overlay-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #a78bfa;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
+}
+
+.overlay-hero-tag i {
+    width: 14px;
+    height: 14px;
+}
+
+.overlay-hero-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f9fafb;
+    margin-bottom: 0.4rem;
+}
+
+.overlay-hero-teams {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.overlay-hero-vs {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+    margin: 0 0.5rem;
+    text-transform: uppercase;
+}
+
+.overlay-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+/* ---- Section icon color variants ---- */
+
+.card-icon-purple {
+    background: linear-gradient(135deg, #7C3AED, #a78bfa);
+}
+
+.card-icon-green {
+    background: linear-gradient(135deg, #16a34a, #34d399);
+}
+
+.card-icon-pink {
+    background: linear-gradient(135deg, #ec4899, #f59e0b);
+}
+
+/* ---- Theme picker (radio-as-cards) ---- */
+
+.theme-option-row {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.theme-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 0.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.theme-option:hover {
+    transform: translateY(-2px);
+}
+
+.theme-option-active {
+    border-color: #7C3AED;
+    background: rgba(124, 58, 237, 0.1);
+    color: #f3f4f6;
+}
+
+.theme-option-swatch {
+    width: 28px;
+    height: 20px;
+    border-radius: 0.3rem;
+}
+
+.theme-swatch-default { background: linear-gradient(135deg, #7C3AED, #2563EB); }
+.theme-swatch-minimal { background: rgba(255, 255, 255, 0.15); }
+.theme-swatch-broadcast-bold { background: linear-gradient(135deg, #ef4444, #7C3AED); }
+
+/* ---- Color input + presets ---- */
+
+.color-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.color-swatch-presets {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.color-swatch-preset {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--swatch-color);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    padding: 0;
+}
+
+.color-swatch-preset:hover {
+    transform: scale(1.15);
+    border-color: #fff;
+}
+
+/* ---- Sponsor logo dropzone ---- */
+
+.logo-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-radius: 0.8rem;
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    transition: border-color 0.15s ease, background 0.15s ease;
+    position: relative;
+}
+
+.logo-dropzone:hover {
+    border-color: #7C3AED;
+    background: rgba(124, 58, 237, 0.05);
+}
+
+.logo-dropzone i {
+    width: 26px;
+    height: 26px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.logo-dropzone-preview {
+    max-height: 56px;
+    max-width: 160px;
+    object-fit: contain;
+}
+
+.logo-dropzone-replace {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    color: #a78bfa;
+    font-weight: 600;
+}
+
+.logo-dropzone-replace i {
+    width: 12px;
+    height: 12px;
+    color: #a78bfa;
+}
+
+/* ---- Sticky save bar ---- */
+
+.overlay-save-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    margin-top: 1.5rem;
+    position: sticky;
+    bottom: 1rem;
+    z-index: 10;
+}
+
+.overlay-save-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.overlay-save-hint i {
+    width: 14px;
+    height: 14px;
+    color: #7C3AED;
+}
+
+.overlay-save-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .overlay-hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .theme-option-row {
+        flex-direction: column;
+    }
+
+    .overlay-save-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
