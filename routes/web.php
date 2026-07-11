@@ -44,6 +44,8 @@ Route::get('/overlay-config/{match}/select-template', [OverlayController::class,
 
 Route::post('/overlay-config/{match}/apply-template/{template}', [OverlayController::class, 'applyTemplate'])
     ->name('overlay.apply-template');
+    Route::get('/overlay-config/{match}/preview', [OverlayController::class, 'preview'])
+    ->name('overlay.preview');
 });
 Route::get('/overlay/{match}/render', [OverlayController::class, 'render'])
     ->name('overlay.render');

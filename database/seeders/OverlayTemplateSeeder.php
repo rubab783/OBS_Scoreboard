@@ -9,97 +9,460 @@ class OverlayTemplateSeeder extends Seeder
 {
     public function run(): void
     {
+        OverlayTemplate::query()->delete();
+
         $templates = [
-            // ── Scoreboard ──────────────────────────────
+
+            /*
+            |--------------------------------------------------------------------------
+            | Scoreboard
+            |--------------------------------------------------------------------------
+            */
+
             [
-                'name' => 'Red Swish', 'slug' => 'red-swish', 'category' => 'scoreboard',
-                'sport' => 'Football', 'accent_color' => '#ef4444', 'secondary_color' => '#2563eb',
+                'name' => 'Red Swish',
+                'slug' => 'red-swish',
+                'category' => 'scoreboard',
+                'sport' => 'Football',
+                'thumbnail' => null,
+                'accent_color' => '#ef4444',
+                'secondary_color' => '#2563eb',
                 'layout_style' => 'bar-bottom-split',
-                'config' => ['theme' => 'default', 'animation_style' => 'slide', 'show_logos' => true, 'show_timer' => true, 'show_score' => true, 'show_period' => true, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'scoreboard.red-swish',
+                'css_file' => 'overlay/templates/red-swish.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'default',
+                    'animation_style' => 'slide',
+                    'show_logos' => true,
+                    'show_timer' => true,
+                    'show_score' => true,
+                    'show_period' => true,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+                'is_active' => true,
             ],
+
             [
-                'name' => 'Edge Series', 'slug' => 'edge-series', 'category' => 'scoreboard',
-                'sport' => 'Basketball', 'accent_color' => '#2563eb', 'secondary_color' => '#f59e0b',
+                'name' => 'Edge Series',
+                'slug' => 'edge-series',
+                'category' => 'scoreboard',
+                'sport' => 'Basketball',
+                'thumbnail' => null,
+                'accent_color' => '#2563eb',
+                'secondary_color' => '#f59e0b',
                 'layout_style' => 'bar-bottom-split',
-                'config' => ['theme' => 'minimal', 'animation_style' => 'fade', 'show_logos' => true, 'show_timer' => true, 'show_score' => true, 'show_period' => true, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'scoreboard.edge-series',
+                'css_file' => 'overlay/templates/edge-series.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'minimal',
+                    'animation_style' => 'fade',
+                    'show_logos' => true,
+                    'show_timer' => true,
+                    'show_score' => true,
+                    'show_period' => true,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+                'is_active' => true,
             ],
+
             [
-                'name' => 'Dark Blue', 'slug' => 'dark-blue-scoreboard', 'category' => 'scoreboard',
-                'sport' => null, 'accent_color' => '#1d4ed8', 'secondary_color' => '#f59e0b',
+                'name' => 'Dark Blue',
+                'slug' => 'dark-blue-scoreboard',
+                'category' => 'scoreboard',
+                'sport' => null,
+                'thumbnail' => null,
+                'accent_color' => '#1d4ed8',
+                'secondary_color' => '#f59e0b',
                 'layout_style' => 'pill-top-split',
-                'config' => ['theme' => 'broadcast-bold', 'animation_style' => 'fade', 'show_logos' => false, 'show_timer' => true, 'show_score' => true, 'show_period' => true, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'scoreboard.blue-black',
+                'css_file' => 'overlay/templates/blue-black.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'broadcast-bold',
+                    'animation_style' => 'fade',
+                    'show_logos' => false,
+                    'show_timer' => true,
+                    'show_score' => true,
+                    'show_period' => true,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+                'is_active' => true,
             ],
+            /*
+            |--------------------------------------------------------------------------
+            | Team
+            |--------------------------------------------------------------------------
+            */
 
-            // ── Team ──────────────────────────────
             [
-                'name' => 'Starting Lineup', 'slug' => 'starting-lineup', 'category' => 'team',
-                'sport' => null, 'accent_color' => '#7C3AED', 'secondary_color' => '#312e81',
+                'name' => 'Starting Lineup',
+                'slug' => 'starting-lineup',
+                'category' => 'team',
+                'sport' => null,
+                'thumbnail' => null,
+                'accent_color' => '#7C3AED',
+                'secondary_color' => '#312e81',
                 'layout_style' => 'list-panel',
-                'config' => ['theme' => 'default', 'animation_style' => 'slide', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'team.starting-lineup',
+                'css_file' => 'overlay/templates/starting-lineup.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'default',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+                'is_active' => true,
             ],
+
             [
-                'name' => 'Team Card', 'slug' => 'team-card', 'category' => 'team',
-                'sport' => 'Football', 'accent_color' => '#2563eb', 'secondary_color' => '#0f172a',
+                'name' => 'Team Card',
+                'slug' => 'team-card',
+                'category' => 'team',
+                'sport' => 'Football',
+                'thumbnail' => null,
+                'accent_color' => '#2563eb',
+                'secondary_color' => '#0f172a',
                 'layout_style' => 'card-team',
-                'config' => ['theme' => 'minimal', 'animation_style' => 'fade', 'show_logos' => true, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'team.team-card',
+                'css_file' => 'overlay/templates/team-card.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'minimal',
+                    'animation_style' => 'fade',
+                    'show_logos' => true,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+                'is_active' => true,
             ],
 
-            // ── Lower Third ──────────────────────────────
+            /*
+            |--------------------------------------------------------------------------
+            | Lower Third
+            |--------------------------------------------------------------------------
+            */
+
             [
-                'name' => 'Blue Announcement', 'slug' => 'blue-announcement', 'category' => 'lower_third',
-                'sport' => null, 'accent_color' => '#2563eb', 'secondary_color' => null,
+                'name' => 'Blue Announcement',
+                'slug' => 'blue-announcement',
+                'category' => 'lower_third',
+                'sport' => null,
+                'thumbnail' => null,
+                'accent_color' => '#2563eb',
+                'secondary_color' => null,
                 'layout_style' => 'pill-bottom-left',
-                'config' => ['theme' => 'default', 'animation_style' => 'slide', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => true, 'ticker_text' => 'Announcement text goes here'],
+                'blade_view' => 'lower-third.blue-announcement',
+                'css_file' => 'overlay/templates/blue-announcement.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'default',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => true,
+                    'ticker_text' => 'Announcement text goes here',
+                ],
+                'is_active' => true,
             ],
+
             [
-                'name' => 'Black Pill', 'slug' => 'black-pill', 'category' => 'lower_third',
-                'sport' => null, 'accent_color' => '#111827', 'secondary_color' => null,
+                'name' => 'Black Pill',
+                'slug' => 'black-pill',
+                'category' => 'lower_third',
+                'sport' => null,
+                'thumbnail' => null,
+                'accent_color' => '#111827',
+                'secondary_color' => null,
                 'layout_style' => 'pill-bottom-center',
-                'config' => ['theme' => 'minimal', 'animation_style' => 'fade', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => true, 'ticker_text' => 'Main announcement part'],
+                'blade_view' => 'lower-third.black-pill',
+                'css_file' => 'overlay/templates/black-pill.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'minimal',
+                    'animation_style' => 'fade',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => true,
+                    'ticker_text' => 'Main announcement part',
+                ],
+                'is_active' => true,
             ],
+
             [
-                'name' => 'Green Light', 'slug' => 'green-light', 'category' => 'lower_third',
-                'sport' => null, 'accent_color' => '#16a34a', 'secondary_color' => null,
+                'name' => 'Green Light',
+                'slug' => 'green-light',
+                'category' => 'lower_third',
+                'sport' => null,
+                'thumbnail' => null,
+                'accent_color' => '#16a34a',
+                'secondary_color' => null,
                 'layout_style' => 'banner-bottom',
-                'config' => ['theme' => 'default', 'animation_style' => 'slide', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => true, 'ticker_text' => 'Announcement title goes here'],
+                'blade_view' => 'lower-third.green-light',
+                'css_file' => 'overlay/templates/green-light.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'default',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => true,
+                    'ticker_text' => 'Announcement title goes here',
+                ],
+                'is_active' => true,
             ],
-
-            // ── Sponsor ──────────────────────────────
+                        // ─────────────────────────────────────────────
+            // Sponsor
+            // ─────────────────────────────────────────────
             [
-                'name' => 'Sponsor Display', 'slug' => 'sponsor-display', 'category' => 'sponsor',
-                'sport' => null, 'accent_color' => '#94a3b8', 'secondary_color' => null,
+                'name' => 'Sponsor Corner',
+                'slug' => 'sponsor-corner',
+                'category' => 'sponsor',
+                'sport' => null,
+                'accent_color' => '#0f172a',
+                'secondary_color' => '#f59e0b',
                 'layout_style' => 'corner-badge',
-                'config' => ['theme' => 'minimal', 'animation_style' => 'fade', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => true, 'show_ticker' => false],
+                'blade_view' => 'sponsor.corner-badge',
+                'config' => [
+                    'theme' => 'minimal',
+                    'animation_style' => 'fade',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => true,
+                    'show_ticker' => false,
+                ],
+            ],
+            [
+                'name' => 'Sponsor Lower Banner',
+                'slug' => 'sponsor-lower-banner',
+                'category' => 'sponsor',
+                'sport' => null,
+                'accent_color' => '#2563eb',
+                'secondary_color' => '#0f172a',
+                'layout_style' => 'banner-bottom',
+                'blade_view' => 'sponsor.lower-banner',
+                'config' => [
+                    'theme' => 'default',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => true,
+                    'show_ticker' => false,
+                ],
             ],
 
-            // ── Penalties ──────────────────────────────
+            // ─────────────────────────────────────────────
+            // Penalties
+            // ─────────────────────────────────────────────
             [
-                'name' => 'Red Card', 'slug' => 'red-card', 'category' => 'penalties',
-                'sport' => 'Football', 'accent_color' => '#dc2626', 'secondary_color' => null,
+                'name' => 'Red Card',
+                'slug' => 'red-card',
+                'category' => 'penalties',
+                'sport' => 'Football',
+                'accent_color' => '#dc2626',
+                'secondary_color' => '#111827',
                 'layout_style' => 'card-penalty',
-                'config' => ['theme' => 'broadcast-bold', 'animation_style' => 'slide', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'penalties.red-card',
+                'config' => [
+                    'theme' => 'broadcast-bold',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
             ],
             [
-                'name' => 'Yellow Card', 'slug' => 'yellow-card', 'category' => 'penalties',
-                'sport' => 'Football', 'accent_color' => '#eab308', 'secondary_color' => null,
+                'name' => 'Yellow Card',
+                'slug' => 'yellow-card',
+                'category' => 'penalties',
+                'sport' => 'Football',
+                'accent_color' => '#facc15',
+                'secondary_color' => '#111827',
                 'layout_style' => 'card-penalty',
-                'config' => ['theme' => 'broadcast-bold', 'animation_style' => 'slide', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => false],
-            ],
+                'blade_view' => 'penalties.yellow-card',
+                'config' => [
+                    'theme' => 'broadcast-bold',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+            ], 
+                        // ─────────────────────────────────────────────
+            // Titles
+            // ─────────────────────────────────────────────
 
-            // ── Titles ──────────────────────────────
             [
-                'name' => 'Title Fullscreen Dark Blue', 'slug' => 'title-fullscreen-dark-blue', 'category' => 'titles',
-                'sport' => null, 'accent_color' => '#1d4ed8', 'secondary_color' => '#0f172a',
+                'name' => 'Blue Black Title',
+                'slug' => 'blue-black-title',
+                'category' => 'titles',
+                'sport' => null,
+                'accent_color' => '#2563eb',
+                'secondary_color' => '#111827',
                 'layout_style' => 'fullscreen-center',
-                'config' => ['theme' => 'broadcast-bold', 'animation_style' => 'fade', 'show_logos' => true, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'titles.blue-black',
+                'css_file' => 'overlay/templates/blue-black.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'broadcast-bold',
+                    'animation_style' => 'fade',
+                    'show_logos' => true,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
             ],
 
-            // ── Substitution ──────────────────────────────
             [
-                'name' => 'Navy Angular', 'slug' => 'navy-angular', 'category' => 'substitution',
-                'sport' => 'Football', 'accent_color' => '#1e3a8a', 'secondary_color' => '#dc2626',
+                'name' => 'Modern Title',
+                'slug' => 'modern-title',
+                'category' => 'titles',
+                'sport' => null,
+                'accent_color' => '#7c3aed',
+                'secondary_color' => '#312e81',
+                'layout_style' => 'fullscreen-center',
+                'blade_view' => 'titles.modern',
+                'css_file' => 'overlay/templates/substitution-modern.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'default',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+            ],
+
+            [
+                'name' => 'Minimal Title',
+                'slug' => 'minimal-title',
+                'category' => 'titles',
+                'sport' => null,
+                'accent_color' => '#0f172a',
+                'secondary_color' => '#475569',
+                'layout_style' => 'fullscreen-center',
+                'blade_view' => 'titles.minimal',
+                'css_file' => 'overlay/templates/minimal.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'minimal',
+                    'animation_style' => 'fade',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+            ],
+
+            // ─────────────────────────────────────────────
+            // Substitution
+            // ─────────────────────────────────────────────
+
+            [
+                'name' => 'Blue Black Substitution',
+                'slug' => 'blue-black-substitution',
+                'category' => 'substitution',
+                'sport' => 'Football',
+                'accent_color' => '#2563eb',
+                'secondary_color' => '#dc2626',
                 'layout_style' => 'arrow-card',
-                'config' => ['theme' => 'default', 'animation_style' => 'slide', 'show_logos' => false, 'show_timer' => false, 'show_score' => false, 'show_period' => false, 'show_sponsor' => false, 'show_ticker' => false],
+                'blade_view' => 'substitution.blue-black',
+                'css_file' => 'overlay/templates/substitution-blue-black.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'default',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+            ],
+
+            [
+                'name' => 'Modern Substitution',
+                'slug' => 'modern-substitution',
+                'category' => 'substitution',
+                'sport' => 'Football',
+                'accent_color' => '#16a34a',
+                'secondary_color' => '#0f172a',
+                'layout_style' => 'arrow-card',
+                'blade_view' => 'substitution.modern',
+                'css_file' => 'overlay/templates/title-modern.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'minimal',
+                    'animation_style' => 'fade',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
+            ],
+
+            [
+                'name' => 'Broadcast Substitution',
+                'slug' => 'broadcast-substitution',
+                'category' => 'substitution',
+                'sport' => 'Football',
+                'accent_color' => '#dc2626',
+                'secondary_color' => '#111827',
+                'layout_style' => 'arrow-card',
+                'blade_view' => 'substitution.broadcast',
+                'css_file' => 'overlay/templates/substitution-broadcast.css',
+                'js_file' => null,
+                'config' => [
+                    'theme' => 'broadcast-bold',
+                    'animation_style' => 'slide',
+                    'show_logos' => false,
+                    'show_timer' => false,
+                    'show_score' => false,
+                    'show_period' => false,
+                    'show_sponsor' => false,
+                    'show_ticker' => false,
+                ],
             ],
         ];
 
@@ -110,4 +473,4 @@ class OverlayTemplateSeeder extends Seeder
             );
         }
     }
-}
+} 

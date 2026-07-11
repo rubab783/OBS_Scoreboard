@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class OverlaySetting extends Model
 {
@@ -11,6 +12,7 @@ class OverlaySetting extends Model
 
     protected $fillable = [
         'match_id',
+        'template_id',
         'theme',
         'animation_style',
         'accent_color',
@@ -40,15 +42,13 @@ class OverlaySetting extends Model
         return $this->belongsTo(GameMatch::class, 'match_id');
     }
 
-    /**
-     * Publicly accessible sponsor logo URL, or null if none uploaded.
-     */
+    public function template()
+    {
+        return $this->belongsTo(OverlayTemplate::class, 'template_id');
+    }
+
     public function getSponsorLogoUrlAttribute(): ?string
     {
-        return $this->sponsor_logo ? \Storage::url($this->sponsor_logo) : null;
+        return $this->sponsor_logo ? Storage::url($this->sponsor_logo) : null;
     }
-    public function template()
-{
-    return $this->belongsTo(OverlayTemplate::class, 'overlay_template_id');
-}
 }

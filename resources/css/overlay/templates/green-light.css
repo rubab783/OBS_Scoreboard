@@ -1,0 +1,107 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:transparent;
+    font-family:Inter,sans-serif;
+}
+
+.gl-overlay{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    padding:45px;
+
+}
+
+.gl-banner{
+
+    display:flex;
+
+    align-items:center;
+
+    min-width:900px;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    background:rgba(17,24,39,.95);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:0 12px 35px rgba(0,0,0,.35);
+
+}
+
+.gl-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:18px 24px;
+
+    background:var(--accent-color);
+
+}
+
+.gl-live-dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+}
+
+.gl-label{
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    letter-spacing:.12em;
+
+}
+
+.gl-content{
+
+    flex:1;
+
+    padding:18px 28px;
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}

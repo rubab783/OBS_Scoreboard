@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LiveScore — Live Sports Broadcasting</title>
+    <title>Scorify — Live Sports Broadcasting</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -1179,7 +1179,7 @@
 
 <!-- NAVBAR -->
 <nav class="navbar">
-    <a href="/" class="nav-logo">Live<span>Score</span></a>
+    <a href="/" class="nav-logo">Scori<span>fy</span></a>
 
     <ul class="nav-links">
         <li><a href="#features">Features</a></li>
@@ -1305,7 +1305,7 @@
 
         <div class="comparison-grid">
             <div class="cmp-col left">
-                <div class="cmp-head">✕ &nbsp; Without LiveScore Pro</div>
+                <div class="cmp-head">✕ &nbsp; Without Scorify Pro</div>
                 <div class="cmp-item"><span class="cmp-icon bad">✕</span>Score updates lag behind live play</div>
                 <div class="cmp-item"><span class="cmp-icon bad">✕</span>OBS overlays require manual editing</div>
                 <div class="cmp-item"><span class="cmp-icon bad">✕</span>Scoreboards look dated and amateur</div>
@@ -1321,7 +1321,7 @@
                 </div>
             </div>
             <div class="cmp-col right">
-                <div class="cmp-head">✓ &nbsp; With LiveScore Pro</div>
+                <div class="cmp-head">✓ &nbsp; With Scorify Pro</div>
                 <div class="cmp-item"><span class="cmp-icon good">✓</span>One tap updates scores instantly</div>
                 <div class="cmp-item"><span class="cmp-icon good">✓</span>Auto-synced via WebSockets — no refresh</div>
                 <div class="cmp-item"><span class="cmp-icon good">✓</span>Broadcast-quality visuals always</div>
@@ -1645,7 +1645,7 @@
                     <li>Custom integrations</li>
                     <li>SLA guarantee</li>
                 </ul>
-                <a href="mailto:hello@livescore.com" class="price-btn price-btn-ghost">Contact Sales</a>
+                <a href="mailto:hello@scorify.com" class="price-btn price-btn-ghost">Contact Sales</a>
             </div>
         </div>
     </div>
@@ -1665,7 +1665,7 @@
             </details>
             <details class="faq-item">
                 <summary>Do I need to install any software?</summary>
-                <p class="faq-answer">No. LiveScore Pro is entirely web-based. You only need a browser for the admin dashboard and OBS Studio for your stream.</p>
+                <p class="faq-answer">No. Scorify Pro is entirely web-based. You only need a browser for the admin dashboard and OBS Studio for your stream.</p>
             </details>
             <details class="faq-item">
                 <summary>Can I use my own team logos?</summary>
@@ -1688,7 +1688,7 @@
     <div class="container">
         <p class="cta-eyebrow">Ready to go live?</p>
         <h2 class="cta-title">BROADCAST<br>LIKE A PRO.</h2>
-        <p class="cta-sub">Join streamers already using LiveScore Pro.</p>
+        <p class="cta-sub">Join streamers already using Scorify Pro.</p>
         <div class="cta-actions">
             <a href="/register" class="btn-primary">Start Free →</a>
             <a href="#features" class="btn-ghost">See Features</a>
@@ -1700,7 +1700,7 @@
 <footer>
     <div class="footer-inner">
         <div>
-            <div class="footer-brand-logo">Live<span>Score</span> Pro</div>
+            <div class="footer-brand-logo">Scori<span>fy</span></div>
             <p class="footer-desc">Professional real-time sports broadcasting overlays for OBS Studio and streaming platforms.</p>
         </div>
         <div class="footer-col">
@@ -1729,8 +1729,9 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© {{ date('Y') }} LiveScore Pro. All rights reserved.</p>
+        <p>© {{ date('Y') }} Scorify Pro. All rights reserved.</p>
         <p>Built with Laravel 12 · Real-time via WebSockets</p>
+
     </div>
 </footer>
 

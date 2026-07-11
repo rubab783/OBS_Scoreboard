@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class OverlayTemplate extends Model
 {
@@ -12,11 +13,16 @@ class OverlayTemplate extends Model
     protected $fillable = [
         'name',
         'slug',
+        'description',
         'category',
         'sport',
+        'thumbnail',
         'accent_color',
         'secondary_color',
         'layout_style',
+        'blade_view',
+        'css_file',
+        'js_file',
         'config',
         'is_active',
     ];
@@ -28,7 +34,7 @@ class OverlayTemplate extends Model
 
     public function overlaySettings()
     {
-        return $this->hasMany(OverlaySetting::class);
+        return $this->hasMany(OverlaySetting::class, 'template_id');
     }
 
     public function scopeActive($query)
@@ -36,10 +42,6 @@ class OverlayTemplate extends Model
         return $query->where('is_active', true);
     }
 
-    /**
-     * Templates compatible with a given sport: either sport-specific
-     * matches, or sport-agnostic templates (sport = null).
-     */
     public function scopeForSport($query, ?string $sport)
     {
         return $query->where(function ($q) use ($sport) {
@@ -53,5 +55,23 @@ class OverlayTemplate extends Model
     public function scopeCategory($query, ?string $category)
     {
         return $category ? $query->where('category', $category) : $query;
+    }
+
+    /**
+     * Fully-qualified Blade view path used by @includeIf on the render page.
+     * e.g. "overlay.templates.dark-blue"
+     */
+    public function getBladeViewPathAttribute(): string
+    {
+        return 'overlay.templates.' . $this->blade_view;
+    }
+
+    /**
+     * Public URL for the thumbnail image, or null if not set
+     * (falls back to a CSS-only preview in the gallery).
+     */
+    public function getThumbnailUrlAttribute(): ?string
+    {
+        return $this->thumbnail ? Storage::url($this->thumbnail) : null;
     }
 }

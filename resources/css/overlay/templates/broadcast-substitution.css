@@ -1,0 +1,146 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    background:transparent;
+
+    font-family:Inter,sans-serif;
+
+}
+
+.bs-overlay{
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    padding-right:70px;
+
+}
+
+.bs-card{
+
+    width:460px;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    background:#0f172a;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.45);
+
+}
+
+.bs-title{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:14px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+}
+
+.bs-team{
+
+    padding:18px;
+
+    color:#fff;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.bs-players{
+
+    padding:18px;
+
+}
+
+.bs-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-bottom:16px;
+
+    color:#fff;
+
+}
+
+.bs-row:last-child{
+
+    margin-bottom:0;
+
+}
+
+.bs-indicator{
+
+    width:62px;
+
+    text-align:center;
+
+    padding:8px 0;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+.bs-row.in .bs-indicator{
+
+    background:#22c55e;
+
+}
+
+.bs-row.out .bs-indicator{
+
+    background:#ef4444;
+
+}
+
+.bs-name{
+
+    font-size:20px;
+
+    font-weight:600;
+
+}

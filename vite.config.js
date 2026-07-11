@@ -12,6 +12,9 @@ export default defineConfig({
                  'resources/css/overlay-theme.css',
                  'resources/js/overlay-render.js',
                  'resources/js/overlay-templates.js',
+                 'resources/js/overlay-search.js',
+                  'resources/js/overlay-category.js',
+                  'resources/js/live-preview.js'
             ],
             refresh: true,
         }),

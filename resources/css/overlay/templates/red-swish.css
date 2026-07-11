@@ -1,0 +1,168 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    overflow:hidden;
+    background:transparent;
+    font-family:Inter,Arial,sans-serif;
+
+}
+
+.rs-overlay{
+
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+
+    padding-top:35px;
+
+}
+
+.rs-scoreboard{
+
+    display:flex;
+    align-items:center;
+
+    min-width:1050px;
+    height:92px;
+
+    background:
+        linear-gradient(135deg,#8b0000,#d11b1b);
+
+    border-radius:50px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.45);
+
+    overflow:hidden;
+
+}
+
+.rs-team{
+
+    width:360px;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+    padding:0 28px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--team-color),
+            rgba(255,255,255,.06)
+        );
+
+}
+
+.rs-right{
+
+    justify-content:flex-end;
+
+}
+
+.rs-logo{
+
+    width:52px;
+    height:52px;
+
+    object-fit:contain;
+
+    background:#fff;
+    border-radius:50%;
+    padding:4px;
+
+}
+
+.rs-name{
+
+    font-size:26px;
+    font-weight:700;
+    letter-spacing:.5px;
+
+    white-space:nowrap;
+
+}
+
+.rs-center{
+
+    width:330px;
+    height:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:24px;
+
+    position:relative;
+
+}
+
+.rs-score{
+
+    width:70px;
+    text-align:center;
+
+    font-size:42px;
+    font-weight:800;
+
+    color:#fff;
+
+}
+
+.rs-clock{
+
+    background:#ffffff;
+
+    color:#d11b1b;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:24px;
+    font-weight:800;
+
+    min-width:120px;
+
+    text-align:center;
+
+}
+
+.rs-period{
+
+    position:absolute;
+
+    bottom:8px;
+
+    left:50%;
+    transform:translateX(-50%);
+
+    background:#111;
+
+    color:#fff;
+
+    padding:3px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+}

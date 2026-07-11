@@ -283,9 +283,32 @@ justify-content:center;
 @media (max-width: 900px) {
     .sport-grid { grid-template-columns: repeat(2, 1fr); }
 }
+@media (max-width: 900px) {
+    .sport-grid-premium {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
+    .wizard-heading {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sport-grid-premium {
+        grid-template-columns: 1fr;
+    }
+}
 
 @media (max-width: 640px) {
     .template-toolbar { flex-direction: column; align-items: stretch; }
     .template-search { min-width: 0; }
+}
+@media (max-width: 1024px) {
+    .configure-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .configure-preview-panel {
+        position: static;
+    }
 }

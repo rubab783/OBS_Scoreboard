@@ -37,205 +37,490 @@
    Overlay Template Wizard
    ========================================================================== */
 
-.wizard-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem;
+/* ==========================================================================
+   Overlay Wizard — Premium Redesign
+   ========================================================================== */
+
+.wizard-stage {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-.wizard-progress {
+/* ---- Progress header (shared component) ---- */
+
+.wizard-progress-header {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    width: 100%;
+    max-width: 420px;
+    margin: 1.5rem auto 0.75rem;
+    justify-content: center;
 }
 
-.wizard-progress-bar {
+.wizard-progress-track {
     flex: 1;
-    max-width: 320px;
-    height: 4px;
+    display: flex;
+    gap: 0.4rem;
+}
+
+.wizard-progress-segment {
+    flex: 1;
+    height: 5px;
     border-radius: 9999px;
     background: rgba(255, 255, 255, 0.08);
-    overflow: hidden;
+    transition: background 0.3s ease;
 }
 
-.wizard-progress-fill {
-    height: 100%;
+.wizard-progress-segment-filled {
     background: linear-gradient(90deg, #7C3AED, #2563EB);
-    border-radius: 9999px;
-    transition: width 0.3s ease;
 }
 
-.wizard-progress-label {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.5);
+.wizard-progress-count {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
 }
 
 .wizard-step-tag {
-    font-size: 0.8rem;
+    display: inline-block;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: #7C3AED;
+    color: #a78bfa;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
 }
+
+/* ---- Hero heading ---- */
+
+.wizard-hero-text {
+    margin-bottom: 2.5rem;
+}
+
+.wizard-heading {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: #f9fafb;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, #ffffff, #c4b5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.wizard-subheading {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ---- Sport cards ---- */
+
+.sport-grid-premium {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+    width: 100%;
+}
+
+.sport-card-premium {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.25rem 1rem;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #f3f4f6;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background 0.25s ease;
+}
+
+.sport-card-premium:hover {
+    transform: translateY(-6px);
+    border-color: rgba(124, 58, 237, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.sport-card-glow {
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.25), transparent 65%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.sport-card-premium:hover .sport-card-glow {
+    opacity: 1;
+}
+
+.sport-card-icon-ring {
+    position: relative;
+    z-index: 1;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(37, 99, 235, 0.1));
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    transition: transform 0.25s ease;
+}
+
+.sport-card-premium:hover .sport-card-icon-ring {
+    transform: scale(1.08);
+}
+
+.sport-card-icon-ring i {
+    width: 28px;
+    height: 28px;
+    color: #a78bfa;
+}
+
+.sport-card-label {
+    position: relative;
+    z-index: 1;
+}
+
+.sport-card-premium-active {
+    border-color: #7C3AED;
+    background: rgba(124, 58, 237, 0.12);
+    box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.4), 0 8px 32px rgba(124, 58, 237, 0.25);
+}
+
+.sport-card-premium-active .sport-card-icon-ring {
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    border-color: transparent;
+}
+
+.sport-card-premium-active .sport-card-icon-ring i {
+    color: #ffffff;
+}
+
+.sport-card-check {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.sport-card-check i {
+    width: 12px;
+    height: 12px;
+    color: #ffffff;
+}
+
 /* ==========================================================================
    Overlay Config — Match Picker
    ========================================================================== */
 
-.overlay-picker-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    max-width: 1400px;
-    margin: 0 auto;
+/* ==========================================================================
+   Overlay Gallery — Premium Redesign
+   ========================================================================== */
+
+.wizard-stage-wide {
+    max-width: 1200px;
 }
 
-.overlay-picker-header {
+/* ---- Toolbar ---- */
+
+.template-gallery-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
-}
-
-.overlay-empty-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 4rem 2rem;
-    text-align: center;
-}
-
-.overlay-empty-state i {
-    width: 40px;
-    height: 40px;
-    color: rgba(255, 255, 255, 0.3);
-}
-
-.overlay-empty-state h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #f3f4f6;
-}
-
-.overlay-empty-state p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
+    width: 100%;
     margin-bottom: 0.5rem;
 }
 
-.overlay-match-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.25rem;
+.category-pills-scroll {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scrollbar-width: thin;
 }
 
-.overlay-match-card {
+.category-pills-scroll::-webkit-scrollbar {
+    height: 4px;
+}
+
+.category-pills-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+}
+
+.category-pill {
+    flex-shrink: 0;
+    padding: 0.55rem 1.1rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.category-pill:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #f3f4f6;
+}
+
+.category-pill-active {
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    color: #ffffff;
+    border-color: transparent;
+}
+
+.template-search-premium {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    border-radius: 0.7rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 240px;
+    flex-shrink: 0;
+}
+
+.template-search-premium i {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.template-search-premium input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #f3f4f6;
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.template-count-label {
+    align-self: flex-start;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 1rem;
+}
+
+/* ---- Card grid ---- */
+
+.overlay-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.4rem;
+    width: 100%;
+}
+
+.overlay-card-premium {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
-    padding: 1.5rem;
-    text-decoration: none;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-    cursor: pointer;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.overlay-match-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(124, 58, 237, 0.4);
+.overlay-card-premium:hover {
+    transform: translateY(-5px);
+    border-color: rgba(124, 58, 237, 0.35);
 }
 
-.overlay-match-card-header {
+.overlay-card-selected {
+    border-color: #7C3AED;
+    box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.5), 0 8px 28px rgba(124, 58, 237, 0.25);
+}
+
+.overlay-card-preview {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0a0a0f;
+    overflow: hidden;
+}
+
+.overlay-card-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-card-category-badge {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    color: #f3f4f6;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.overlay-card-selected-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(124, 58, 237, 0.25);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
-.overlay-live-pill {
-    display: inline-flex;
+.overlay-card-check {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    display: flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.12);
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
 }
 
-.overlay-live-pill i {
-    width: 12px;
-    height: 12px;
+.overlay-card-check i {
+    width: 20px;
+    height: 20px;
+    color: #fff;
 }
 
-.overlay-match-name {
-    font-size: 1.05rem;
+.overlay-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.1rem 1.1rem;
+}
+
+.overlay-card-name {
+    font-size: 0.95rem;
     font-weight: 700;
     color: #f3f4f6;
 }
 
-.overlay-match-teams {
+.overlay-card-description {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.4;
+}
+
+.overlay-card-use-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.65);
-}
-
-.overlay-match-vs {
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-}
-
-.overlay-match-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.overlay-theme-tag {
-    display: inline-flex;
-    align-items: center;
+    justify-content: center;
     gap: 0.4rem;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.6);
+    width: 100%;
+    margin-top: 0.4rem;
+    padding: 0.6rem;
+    border-radius: 0.6rem;
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.15s ease;
 }
 
-.overlay-theme-tag i {
+.overlay-card-use-btn:hover {
+    filter: brightness(1.12);
+}
+
+.overlay-card-use-btn i {
     width: 14px;
     height: 14px;
-    color: #7C3AED;
 }
 
-.overlay-match-footer > i {
-    width: 16px;
-    height: 16px;
-    color: rgba(255, 255, 255, 0.3);
+.overlay-card-use-btn-selected {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34d399;
+    cursor: default;
 }
 
-/* ==========================================================================
+.overlay-card-use-btn:disabled {
+    opacity: 1;
+}
+
+/* ---- Skeleton loading state ---- */
+
+.overlay-card-grid-skeleton {
+    margin-bottom: 1.4rem;
+}
+
+.overlay-card-skeleton {
+    aspect-ratio: 16 / 11;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0.03) 75%);
+    background-size: 200% 100%;
+    animation: skeletonShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonShimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@media (max-width: 640px) {
+    .template-gallery-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .template-search-premium {
+        min-width: 0;
+    }
+}/* ==========================================================================
    Overlay Config — Settings Form
    ========================================================================== */
+/* ==========================================================================
+   Configure Page — Two-Column Layout with Live Preview
+   ========================================================================== */
 
-.overlay-config-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
+.configure-wrapper {
     max-width: 1400px;
     margin: 0 auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.overlay-config-header {
+.configure-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -243,48 +528,98 @@
     gap: 1rem;
 }
 
-.overlay-back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
-    text-decoration: none;
-    margin-bottom: 0.75rem;
-    transition: color 0.15s ease;
+.configure-heading {
+    font-size: 1.9rem;
+    text-align: left;
 }
 
-.overlay-back-link:hover {
-    color: #f3f4f6;
+.configure-subheading {
+    text-align: left;
+    margin: 0;
 }
 
-.overlay-back-link i {
-    width: 14px;
-    height: 14px;
+.configure-columns {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
 }
 
-.overlay-live-toggle {
+/* ---- Preview panel ---- */
+
+.configure-preview-panel {
+    position: sticky;
+    top: 1.5rem;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.configure-preview-label {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.9rem 1.25rem;
-}
-
-.overlay-live-label {
-    display: inline-flex;
-    align-items: center;
     gap: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 600;
+    font-size: 0.85rem;
+    font-weight: 700;
     color: #f3f4f6;
 }
 
-.overlay-live-label i {
+.configure-preview-label i {
     width: 16px;
     height: 16px;
     color: #7C3AED;
 }
 
+.configure-preview-hint {
+    margin-left: auto;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.configure-preview-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 0.9rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.15), 0 12px 40px rgba(0, 0, 0, 0.4);
+    background-image:
+        linear-gradient(45deg, #1a1a20 25%, transparent 25%),
+        linear-gradient(-45deg, #1a1a20 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #1a1a20 75%),
+        linear-gradient(-45deg, transparent 75%, #1a1a20 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    background-color: #0f0f14;
+}
+
+.configure-preview-frame iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+/* ---- Settings panel ---- */
+
+.configure-settings-panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.configure-settings-panel .overlay-config-card {
+    margin-bottom: 1.25rem;
+}
+
+.configure-settings-panel .overlay-save-bar {
+    position: sticky;
+    bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
 /* Standalone JS-driven toggle (Live On Air) */
 
 .toggle-switch {

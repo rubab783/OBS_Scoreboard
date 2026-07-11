@@ -7,7 +7,7 @@ use App\Models\OverlaySetting;
 use App\Models\OverlayTemplate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use App\Services\OverlayRenderService;
 class OverlayController extends Controller
 {
     /**
@@ -31,20 +31,18 @@ class OverlayController extends Controller
      * Creates a default OverlaySetting row on first visit if one
      * doesn't exist yet, so the form never breaks on a fresh match.
      */
-    public function edit(GameMatch $match)
-    {
-        abort_unless($match->user_id === auth()->id(), 403);
+   public function edit(GameMatch $match)
+{
+    abort_unless($match->user_id === auth()->id(), 403);
 
-        $settings = OverlaySetting::firstOrCreate(
-            ['match_id' => $match->id]
-        );
-
-        return view('overlay.config', [
-            'match'    => $match,
-            'settings' => $settings,
-        ]);
-    }
-
+   $settings = OverlaySetting::with('template')
+    ->firstOrCreate([
+        'match_id' => $match->id
+    ]); return view('overlay.configure', [
+        'match'    => $match,
+        'settings' => $settings,
+    ]);
+}
     /**
      * Save overlay configuration for a specific match.
      */
@@ -121,17 +119,28 @@ class OverlayController extends Controller
      * Render the public, unauthenticated broadcast overlay for a match.
      * This is the page loaded by OBS Studio's Browser Source.
      */
-    public function render(GameMatch $match)
-    {
-        $match->load(['teamA', 'teamB']);
+  public function render(GameMatch $match)
+{
+    $match->load(['teamA', 'teamB']);
 
-        $settings = OverlaySetting::firstOrCreate(['match_id' => $match->id]);
-
-        return view('overlay.render', [
-            'match'    => $match,
-            'settings' => $settings,
+    $settings = OverlaySetting::with('template')
+        ->firstOrCreate([
+            'match_id' => $match->id
         ]);
+
+    if (!$settings->template) {
+        abort(404, 'No overlay template selected.');
     }
+
+    return view(
+        $settings->template->blade_view_path,
+        [
+            'match' => $match,
+            'settings' => $settings,
+            'template' => $settings->template,
+        ]
+    );
+}
 
     /**
      * Step 1 of the template wizard — confirm/select the sport.
@@ -165,55 +174,102 @@ class OverlayController extends Controller
     /**
      * Step 2 — categorized, searchable template gallery filtered by sport.
      */
-    public function selectTemplate(Request $request, GameMatch $match)
-    {
-        abort_unless($match->user_id === auth()->id(), 403);
+   public function selectTemplate(Request $request, GameMatch $match, OverlayRenderService $overlayService)
+{
+    abort_unless($match->user_id === auth()->id(), 403);
 
-        $category = $request->query('category');
+    $category = $request->query('category');
 
-        $templates = OverlayTemplate::active()
-            ->forSport($match->sport)
-            ->category($category)
-            ->orderBy('category')
-            ->orderBy('name')
-            ->get();
+    $templates = $overlayService->templatesFor($match->sport, $category);
 
-        $categories = [
-            'scoreboard'   => 'Scoreboard',
-            'team'         => 'Team',
-            'lower_third'  => 'Lower Third',
-            'sponsor'      => 'Sponsor',
-            'penalties'    => 'Penalties',
-            'titles'       => 'Titles',
-            'substitution' => 'Substitution',
-        ];
+   $settings = OverlaySetting::with('template')
+    ->firstOrCreate([
+        'match_id'=>$match->id
+    ]); $categories = [
+        'scoreboard'   => 'Scoreboard',
+        'team'         => 'Team',
+        'lower_third'  => 'Lower Third',
+        'sponsor'      => 'Sponsor',
+        'penalties'    => 'Penalties',
+        'titles'       => 'Titles',
+        'substitution' => 'Substitution',
+    ];
 
-        return view('overlay.select-template', [
-            'match'           => $match,
-            'templates'       => $templates,
-            'categories'      => $categories,
-            'activeCategory'  => $category,
-        ]);
-    }
-
+    return view('overlay.select-template', [
+        'match'              => $match,
+        'templates'          => $templates,
+        'categories'         => $categories,
+        'activeCategory'     => $category,
+        'selectedTemplateId' => $settings->template_id,
+    ]);
+}
     /**
      * Apply a chosen template's config to the match's overlay settings,
      * then hand off to the existing Overlay Config page (Step 3) for
      * final review/editing.
      */
-    public function applyTemplate(GameMatch $match, OverlayTemplate $template)
-    {
-        abort_unless($match->user_id === auth()->id(), 403);
+public function applyTemplate(GameMatch $match, OverlayTemplate $template)
+{
+    abort_unless($match->user_id === auth()->id(), 403);
 
-        $settings = OverlaySetting::firstOrCreate(['match_id' => $match->id]);
+    $settings = OverlaySetting::firstOrCreate([
+        'match_id' => $match->id,
+    ]);
 
-        $settings->update(array_merge($template->config, [
-            'overlay_template_id' => $template->id,
-            'accent_color'        => $template->accent_color,
-        ]));
+    $settings->fill(array_merge(
+        $template->config ?? [],
+        [
+            'template_id'  => $template->id,
+            'accent_color' => $template->accent_color,
+        ]
+    ));
 
-        return redirect()
-            ->route('overlay.edit', $match)
-            ->with('success', "Template \"{$template->name}\" applied. Review and adjust below.");
+    $settings->save();
+
+    return redirect()
+        ->route('overlay.edit', $match)
+        ->with('success', "Template '{$template->name}' applied successfully.");
+} /**
+ * Render an ephemeral preview of the overlay using query-string
+ * overrides layered on top of the saved settings — nothing is
+ * persisted here. Used as the live-preview iframe source on the
+ * Configure page so operators see changes before saving.
+ */
+public function preview(Request $request, GameMatch $match)
+{
+    abort_unless($match->user_id === auth()->id(), 403);
+
+    $settings = OverlaySetting::firstOrCreate(['match_id' => $match->id]);
+
+    $booleanFields = ['show_logos', 'show_timer', 'show_score', 'show_period', 'show_sponsor', 'show_ticker'];
+    $textFields    = ['theme', 'animation_style', 'accent_color', 'ticker_text'];
+
+    foreach ($booleanFields as $field) {
+        if ($request->has($field)) {
+            $settings->$field = filter_var($request->input($field), FILTER_VALIDATE_BOOLEAN);
+        }
     }
+
+    foreach ($textFields as $field) {
+        if ($request->filled($field)) {
+            $settings->$field = $request->input($field);
+        }
+    }
+
+ $match->load(['teamA', 'teamB']);
+
+$settings->load('template');
+
+if (!$settings->template) {
+    abort(404, 'No overlay template selected.');
+}
+
+return view(
+    $settings->template->blade_view_path,
+    [
+        'match'    => $match,
+        'settings' => $settings,
+        'template' => $settings->template,
+    ]
+);}
 }
