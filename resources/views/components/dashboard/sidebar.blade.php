@@ -29,7 +29,7 @@
             </span>
 
             <span class="sidebar-logo-text">
-                Live<span>Score</span>
+               Scor<span>ify</span>
             </span>
 
         </a>
@@ -88,7 +88,63 @@
                 </a>
 
             </li>
+            <li>
 
+    <a href="{{ route('teams.index') }}"
+       class="sidebar-link {{ request()->routeIs('teams.*') ? 'active' : '' }}">
+
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M7 7h10v10H7z"
+                  stroke="currentColor"
+                  stroke-width="1.6"/>
+            <path d="M12 7V17M7 12H17"
+                  stroke="currentColor"
+                  stroke-width="1.4"/>
+        </svg>
+
+        Teams
+
+        @if(request()->routeIs('teams.*'))
+            <span class="sidebar-link-dot"></span>
+        @endif
+</a>
+
+</li>
+
+
+                     <li>
+    <a href="{{ route('players.index') }}"
+       class="sidebar-link {{ request()->routeIs('players.*') ? 'active' : '' }}">
+
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+            <circle cx="10" cy="7" r="3"
+                    stroke="currentColor"
+                    stroke-width="1.6"/>
+            <path d="M20 21v-2a4 4 0 0 0-3-3.87"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"/>
+            <path d="M16 4.13a3 3 0 0 1 0 5.82"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"/>
+        </svg>
+
+        Players
+
+        @if(request()->routeIs('players.*'))
+            <span class="sidebar-link-dot"></span>
+        @endif
+
+    </a>
+</li>
+
+ 
         
             {{-- Overlay (Coming Soon) --}}
             <li>

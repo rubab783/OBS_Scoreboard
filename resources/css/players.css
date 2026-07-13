@@ -1,0 +1,340 @@
+/* ==========================================
+   PLAYERS PAGE
+========================================== */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:28px;
+    gap:20px;
+}
+
+.page-header h2{
+    margin:0;
+    font-size:28px;
+    font-weight:700;
+}
+
+.page-header p{
+    margin-top:6px;
+    color:#94a3b8;
+}
+
+.page-header-right{
+    display:flex;
+    gap:12px;
+}
+
+/* ==========================================
+   STATS
+========================================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:28px;
+}
+
+.stat-card{
+    background:#141a2f;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:16px;
+    padding:22px;
+}
+
+.stat-card h3{
+    margin:0;
+    font-size:34px;
+    color:#fff;
+}
+
+.stat-card p{
+    margin-top:8px;
+    color:#94a3b8;
+}
+
+/* ==========================================
+   TOOLBAR
+========================================== */
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    gap:20px;
+}
+
+.toolbar-search input{
+    width:320px;
+    padding:12px 16px;
+    border-radius:10px;
+    border:1px solid rgba(255,255,255,.08);
+    background:#0f172a;
+    color:#fff;
+}
+
+.toolbar-meta{
+    color:#94a3b8;
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.table-card{
+    background:#141a2f;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.06);
+}
+
+.players-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.players-table thead{
+    background:#111827;
+}
+
+.players-table th{
+    padding:18px;
+    text-align:left;
+    color:#94a3b8;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+}
+
+.players-table td{
+    padding:18px;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+
+.players-table tbody tr:hover{
+    background:#1b2340;
+}
+
+/* ==========================================
+   PLAYER CELL
+========================================== */
+
+.player-cell{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.player-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.player-avatar.placeholder{
+    background:#3b82f6;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+}
+
+.player-name{
+    font-weight:600;
+    color:#fff;
+}
+
+.player-meta{
+    margin-top:5px;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+/* ==========================================
+   TEAM
+========================================== */
+
+.team-cell{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.team-logo{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid rgba(255,255,255,.08);
+}
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    padding:5px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.captain{
+    background:#f59e0b22;
+    color:#fbbf24;
+}
+
+.starter{
+    background:#10b98122;
+    color:#34d399;
+}
+
+.position{
+    background:#334155;
+    color:white;
+}
+
+.position.goalkeeper{
+    background:#312e81;
+    color:#c7d2fe;
+}
+
+.position.defender{
+    background:#064e3b;
+    color:#6ee7b7;
+}
+
+.position.midfielder{
+    background:#78350f;
+    color:#fde68a;
+}
+
+.position.forward{
+    background:#7f1d1d;
+    color:#fecaca;
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.status{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status.active{
+    background:#10b98122;
+    color:#34d399;
+}
+
+.status.inactive{
+    background:#47556933;
+    color:#cbd5e1;
+}
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.table-actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-icon{
+    width:36px;
+    height:36px;
+    border:none;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.2s;
+}
+
+.btn-icon.edit{
+    background:#2563eb22;
+}
+
+.btn-icon.edit:hover{
+    background:#2563eb;
+}
+
+.btn-icon.delete{
+    background:#dc262622;
+}
+
+.btn-icon.delete:hover{
+    background:#dc2626;
+}
+
+/* ==========================================
+   EMPTY
+========================================== */
+
+.empty-state{
+    padding:70px 30px;
+    text-align:center;
+}
+
+.empty-state h3{
+    margin-bottom:10px;
+}
+
+.empty-state p{
+    color:#94a3b8;
+    margin-bottom:24px;
+}
+
+/* ==========================================
+   PAGINATION
+========================================== */
+
+.pagination-wrapper{
+    padding:24px;
+    display:flex;
+    justify-content:flex-end;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:900px){
+
+.stats-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.toolbar{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.toolbar-search input{
+    width:100%;
+}
+
+.page-header{
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.page-header-right{
+    width:100%;
+}
+}

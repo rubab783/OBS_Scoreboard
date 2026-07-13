@@ -8,12 +8,18 @@ use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
 {
-    public function index()
-    {
-        $teams = Team::latest()->paginate(10);
+ public function index(Request $request)
+{
+    $teams = Team::withCount('players')
+        ->when($request->search, function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('short_name', 'like', '%' . $request->search . '%');
+        })
+        ->latest()
+        ->paginate(10);
 
-        return view('teams.index', compact('teams'));
-    }
+    return view('teams.index', compact('teams'));
+}
 
     public function create()
     {

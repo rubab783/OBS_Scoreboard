@@ -4,6 +4,8 @@ use App\Http\Controllers\MatchController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OverlayController;
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\TeamController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,9 +21,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('matches.control');
  Route::post('/matches/{match}/control-update', [MatchController::class, 'controlUpdate'])
     ->name('matches.control-update');
-    Route::get('/teams', function () {
-        return view('teams.index');
-    })->name('teams.index');
+    Route::resource('teams', TeamController::class);
   Route::get('/overlay-config', [OverlayController::class, 'index'])
     ->name('overlay.index');
 
@@ -67,4 +67,6 @@ Route::middleware('auth')->prefix('profile')->group(function () {
     Route::delete('/', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 });
+Route::resource('players', PlayerController::class)
+    ->middleware('auth');
 require __DIR__.'/auth.php';

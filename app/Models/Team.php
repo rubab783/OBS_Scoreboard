@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 
 class Team extends Model
 {
-    use HasFactory;
-
+        use HasFactory;
+ public function players()
+{
+    return $this->hasMany(Player::class);
+}
     protected $fillable = [
 
         'name',
@@ -30,4 +34,10 @@ class Team extends Model
 
         'is_active' => 'boolean',
     ];
+    public function getLogoUrlAttribute(): ?string
+{
+    return $this->logo
+        ? Storage::url($this->logo)
+        : null;
+}
 }
