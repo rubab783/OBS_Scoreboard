@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ThemeUpdated;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -42,6 +44,28 @@ class ProfileController extends Controller
         $user->save();
 
         return back()->with('success', 'Profile updated successfully.');
+    }
+
+    /**
+     * Update the authenticated user's theme preference (light/dark)
+     * and broadcast the change so any other open tabs or devices for
+     * this account switch instantly over the websocket connection.
+     */
+    public function updateTheme(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'theme' => ['required', 'string', 'in:light,dark'],
+        ]);
+
+        $user = $request->user();
+
+        $user->update(['theme' => $validated['theme']]);
+
+        broadcast(new ThemeUpdated($user->id, $validated['theme']))->toOthers();
+
+        return response()->json([
+            'theme' => $user->theme,
+        ]);
     }
 
     /**

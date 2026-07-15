@@ -22,11 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusText = document.getElementById('matchStatusText');
     const periodSelect = document.getElementById('periodSelect');
     const syncStatusText = document.getElementById('syncStatusText');
+    const syncDot = document.getElementById('syncDot');
     const lastSyncedAt = document.getElementById('lastSyncedAt');
+    const timerStatusPill = document.getElementById('timerStatusPill');
 
     const timerStartBtn = document.getElementById('timerStartBtn');
     const timerPauseBtn = document.getElementById('timerPauseBtn');
     const timerResetBtn = document.getElementById('timerResetBtn');
+    const statusButtons = document.querySelectorAll('.status-btn');
 
     /* ──────────────────────────────────────────────
        Timer state (drift-corrected)
@@ -53,6 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderTimer() {
         timerEl.textContent = formatTime(currentElapsedSeconds());
         timerEl.dataset.status = timerStatus;
+
+        if (timerStatusPill) {
+            timerStatusPill.textContent = timerStatus.charAt(0).toUpperCase() + timerStatus.slice(1);
+            timerStatusPill.dataset.status = timerStatus;
+        }
     }
 
     function startTickLoop() {
@@ -104,6 +112,22 @@ document.addEventListener('DOMContentLoaded', () => {
     timerResetBtn?.addEventListener('click', resetTimer);
 
     /* ──────────────────────────────────────────────
+       Keyboard shortcut — spacebar toggles start/pause.
+       Standard on broadcast control surfaces; ignored while
+       typing in the period <select> or any input/textarea.
+       ────────────────────────────────────────────── */
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code !== 'Space') return;
+
+        const tag = document.activeElement?.tagName;
+        if (tag === 'SELECT' || tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+        e.preventDefault();
+        timerStatus === 'running' ? pauseTimer() : startTimer();
+    });
+
+    /* ──────────────────────────────────────────────
        Score controls
        ────────────────────────────────────────────── */
 
@@ -112,12 +136,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const team = btn.dataset.team;
             const action = btn.dataset.action;
             const scoreEl = team === 'a' ? teamAScoreEl : teamBScoreEl;
+            if (!scoreEl) return;
 
             let current = parseInt(scoreEl.dataset.score, 10);
             current = action === 'increment' ? current + 1 : Math.max(0, current - 1);
 
             scoreEl.dataset.score = current;
             scoreEl.textContent = current;
+
+            // Small punch animation so a score change is unmistakable to
+            // an operator glancing away from the screen mid-broadcast.
+            scoreEl.classList.remove('score-bump');
+            void scoreEl.offsetWidth; // restart the CSS animation
+            scoreEl.classList.add('score-bump');
 
             persistScore(team, current);
         });
@@ -127,11 +158,18 @@ document.addEventListener('DOMContentLoaded', () => {
        Status + Period controls
        ────────────────────────────────────────────── */
 
-    document.querySelectorAll('.status-btn').forEach((btn) => {
+    function setActiveStatusButton(newStatus) {
+        statusButtons.forEach((btn) => {
+            btn.classList.toggle('active', btn.dataset.status === newStatus);
+        });
+    }
+
+    statusButtons.forEach((btn) => {
         btn.addEventListener('click', () => {
             const newStatus = btn.dataset.status;
             statusBadge.className = `match-status-badge status-${newStatus}`;
             statusText.textContent = newStatus.charAt(0).toUpperCase() + newStatus.slice(1);
+            setActiveStatusButton(newStatus);
             persistStatus(newStatus);
         });
     });
@@ -146,10 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function markSyncing() {
         if (syncStatusText) syncStatusText.textContent = 'Syncing...';
+        if (syncDot) syncDot.dataset.state = 'syncing';
     }
 
     function markSynced() {
-        if (syncStatusText) syncStatusText.textContent = 'Synced';
+        if (syncStatusText) syncStatusText.textContent = 'Synced to overlay';
+        if (syncDot) syncDot.dataset.state = 'synced';
         if (lastSyncedAt) {
             const now = new Date();
             lastSyncedAt.textContent = `Last synced at ${now.toLocaleTimeString()}`;
@@ -157,11 +197,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function markSyncFailed() {
-        if (syncStatusText) syncStatusText.textContent = 'Sync failed';
+        if (syncStatusText) syncStatusText.textContent = 'Sync failed — retrying next change';
+        if (syncDot) syncDot.dataset.state = 'failed';
     }
 
     /* ──────────────────────────────────────────────
-       Persistence (fetch to backend)
+       Persistence (fetch to backend, which then
+       broadcasts to the OBS overlay over WebSocket)
        ────────────────────────────────────────────── */
 
     async function postUpdate(payload) {

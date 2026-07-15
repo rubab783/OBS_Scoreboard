@@ -3,193 +3,140 @@
 ========================================================== */
 
 .dashboard-toolbar{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
-    gap:20px;
-
-    padding:20px 24px;
-
-    margin-bottom:28px;
-
-    border-radius:20px;
-
+    gap:16px;
+    padding:16px 18px;
+    margin-bottom:24px;
+    border-radius:16px;
+    background: var(--card);
+    border:1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    flex-wrap: wrap;
 }
-
-/* Left */
 
 .toolbar-left{
-
     flex:1;
-
+    min-width:220px;
 }
 
-/* Search */
-
 .toolbar-search{
-
     display:flex;
-
     align-items:center;
-
-    gap:12px;
-
-    max-width:430px;
-
-    height:48px;
-
-    padding:0 18px;
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.06);
-
-    border-radius:14px;
-
-    transition:.25s;
-
+    gap:10px;
+    max-width:400px;
+    height:44px;
+    padding:0 16px;
+    background: var(--card-alt);
+    border:1px solid var(--border);
+    border-radius:12px;
+    transition:.2s;
 }
 
 .toolbar-search:hover{
-
-    border-color:rgba(99,102,241,.25);
-
+    border-color: rgba(79,70,229,.25);
 }
 
 .toolbar-search:focus-within{
-
-    border-color:#6366F1;
-
-    box-shadow:0 0 0 4px rgba(99,102,241,.12);
-
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: var(--shadow-focus);
 }
 
-.toolbar-search svg{
-
-    width:18px;
-
-    height:18px;
-
-    color:#94A3B8;
-
+.toolbar-search svg,
+.toolbar-search i{
+    width:17px;
+    height:17px;
+    color: var(--dimmed);
+    flex-shrink:0;
 }
 
 .toolbar-search input{
-
     flex:1;
-
     border:none;
-
     outline:none;
-
     background:transparent;
-
-    color:white;
-
-    font-size:.92rem;
-
+    color: var(--text);
+    font-size:.9rem;
 }
 
 .toolbar-search input::placeholder{
-
-    color:#64748B;
-
+    color: var(--dimmed);
 }
-
-/* Right */
 
 .toolbar-right{
-
     display:flex;
-
     align-items:center;
-
-    gap:14px;
-
+    gap:10px;
+    flex-wrap: wrap;
 }
 
-/* Select */
-
 .toolbar-select{
-
-    height:46px;
-
-    padding:0 16px;
-
-    background:#1E293B;
-
-    color:#CBD5E1;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    border-radius:12px;
-
+    height:42px;
+    padding:0 14px;
+    background: var(--card-alt);
+    color: var(--text);
+    border:1px solid var(--border);
+    border-radius:10px;
     outline:none;
-
     cursor:pointer;
-
-    transition:.25s;
-
+    font-size:.86rem;
+    font-weight:500;
+    transition:.2s;
 }
 
 .toolbar-select:hover{
+    border-color: var(--accent);
+}
 
-    border-color:#6366F1;
+.toolbar-select:focus{
+    border-color: var(--accent);
+    box-shadow: var(--shadow-focus);
+}
 
+.toolbar-reset{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    height:42px;
+    padding:0 14px;
+    border-radius:10px;
+    border:1px solid transparent;
+    background:transparent;
+    color: var(--muted);
+    font-size:.82rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.toolbar-reset:hover{
+    background: var(--red-soft);
+    color: var(--red);
+}
+
+.toolbar-reset svg{
+    width:14px;
+    height:14px;
+}
+
+.toolbar-reset[hidden]{
+    display:none;
+}
+
+.toolbar-result-count{
+    font-size:.78rem;
+    color: var(--dimmed);
+    font-weight:500;
+    padding:0 4px;
 }
 
 /* Responsive */
-
-@media(max-width:1024px){
-
-.dashboard-toolbar{
-
-flex-direction:column;
-
-align-items:stretch;
-
-}
-
-.toolbar-right{
-
-flex-wrap:wrap;
-
-}
-
-.toolbar-search{
-
-max-width:100%;
-
-}
-
-}
-
-@media(max-width:640px){
-
-.toolbar-right{
-
-flex-direction:column;
-
-align-items:stretch;
-
-}
-
-.toolbar-select{
-
-width:100%;
-
-}
-
-.btn-primary{
-
-width:100%;
-
-justify-content:center;
-
-}
-
+@media(max-width:900px){
+    .dashboard-toolbar{ flex-direction:column; align-items:stretch; }
+    .toolbar-left{ flex-direction:column; align-items:stretch; }
+    .toolbar-search{ max-width:100%; }
+    .toolbar-right{ flex-wrap:wrap; }
+    .toolbar-select{ flex:1; }
 }

@@ -6,15 +6,14 @@
     width:264px;
     flex-shrink:0;
     min-height:100vh;
-    padding:28px 20px;
+    padding:24px 16px;
     display:flex;
     flex-direction:column;
-    gap:28px;
-     background:
-        radial-gradient(circle at top left,#4f46e515 0%,transparent 30%),
-        radial-gradient(circle at top right,#2563eb10 0%,transparent 35%),
-        linear-gradient(180deg,#090d18 0%,#0b1120 50%,#070b14 100%);
+    gap:24px;
+    background: var(--sidebar-bg);
     border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
 }
 
 .sidebar-logo{
@@ -22,19 +21,21 @@
     align-items:center;
     gap:10px;
     text-decoration:none;
-    margin-bottom:8px;
+    margin-bottom:4px;
+    padding: 0 8px;
 }
 
 .sidebar-logo-mark{
     width:36px;
     height:36px;
     border-radius: var(--radius-md);
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
     color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
     flex-shrink:0;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.28);
 }
 
 .sidebar-logo-text{
@@ -50,18 +51,18 @@
 
 .sidebar-menu-label{
     font-size:10px;
-    font-weight:500;
-    letter-spacing:0.16em;
+    font-weight:700;
+    letter-spacing:0.14em;
     text-transform:uppercase;
     color: var(--dimmed);
     padding:0 12px;
-    margin-bottom:2px;
+    margin-bottom:6px;
 }
 
 .sidebar-nav{
     display:flex;
     flex-direction:column;
-    gap:4px;
+    gap:2px;
     flex:1;
 }
 
@@ -69,11 +70,11 @@
     display:flex;
     align-items:center;
     gap:12px;
-    padding:11px 12px;
+    padding:10px 12px;
     border-radius: var(--radius-md);
     color: var(--muted);
     text-decoration:none;
-    font-weight:400;
+    font-weight:500;
     font-size:14px;
     border:1px solid transparent;
     transition: background .15s, color .15s, border-color .15s;
@@ -87,14 +88,15 @@
 }
 
 .sidebar-link:hover{
-    background: var(--card);
+    background: var(--card-alt);
     color: var(--text);
 }
 
 .sidebar-link.active{
-    color: var(--text);
-    background: rgba(59,130,246,0.1);
-    border-color: rgba(59,130,246,0.25);
+    color: var(--accent-hi);
+    background: var(--accent-soft);
+    border-color: rgba(79,70,229,0.15);
+    font-weight:600;
 }
 
 .sidebar-link-dot{
@@ -114,13 +116,13 @@
 .sidebar-bottom{
     display:flex;
     flex-direction:column;
-    gap:16px;
+    gap:14px;
 }
 
 .sidebar-quick{
     padding:16px;
-    background: var(--card);
-    border:1px solid var(--border-hi);
+    background: linear-gradient(160deg, var(--accent-soft), #ffffff);
+    border:1px solid rgba(79,70,229,0.12);
     border-radius: var(--radius-lg);
 }
 
@@ -129,14 +131,14 @@
     align-items:center;
     gap:8px;
     font-size:12px;
-    font-weight:500;
-    color: var(--text);
+    font-weight:700;
+    color: var(--accent-hi);
     margin-bottom:6px;
 }
 
 .sidebar-quick p{
     font-size:12px;
-    color: var(--dimmed);
+    color: var(--muted);
     line-height:1.6;
 }
 
@@ -152,6 +154,7 @@
     border-radius: var(--radius-sm);
     font-size:11px;
     color: var(--muted);
+    box-shadow: var(--shadow-xs);
 }
 
 .sidebar-operator{
@@ -161,26 +164,26 @@
     padding:10px 12px;
     border-radius: var(--radius-lg);
     border:1px solid var(--border);
-    background: var(--surface);
+    background: var(--card-alt);
 }
 
 .sidebar-operator-avatar{
     width:34px;
     height:34px;
     border-radius:50%;
-    background: var(--accent);
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
     color:#fff;
     display:flex;
     align-items:center;
     justify-content:center;
     font-size:12px;
-    font-weight:500;
+    font-weight:700;
     flex-shrink:0;
 }
 
 .sidebar-operator-name{
     font-size:13px;
-    font-weight:500;
+    font-weight:600;
     color: var(--text);
 }
 
@@ -198,6 +201,7 @@
     height:5px;
     border-radius:50%;
     background: var(--green);
+    box-shadow: 0 0 0 3px var(--green-soft);
 }
 
 .sidebar-operator-actions{
@@ -215,7 +219,7 @@
     justify-content:center;
     border-radius: var(--radius-sm);
     border:1px solid var(--border-hi);
-    background:transparent;
+    background: var(--surface);
     color: var(--muted);
     cursor:pointer;
     transition: border-color .15s, color .15s, background .15s;
@@ -223,6 +227,7 @@
 
 .logout-btn:hover,
 .icon-btn.sidebar-icon-btn:hover{
-    border-color: rgba(239,68,68,0.4);
+    border-color: rgba(220,38,38,0.3);
+    background: var(--red-soft);
     color: var(--red);
 }

@@ -286,6 +286,25 @@
     font-size:.86rem;
 }
 
+.profile-card .theme-switch{
+    background: rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.profile-card .theme-switch-option{
+    color:#94a3b8;
+}
+
+.profile-card .theme-switch-option:hover{
+    color:#fff;
+}
+
+.profile-card .theme-switch-option.active{
+    background: rgba(255,255,255,.1);
+    color:#fff;
+    box-shadow:none;
+}
+
 .coming-soon{
     padding:6px 12px;
     border-radius:999px;

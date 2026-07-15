@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MatchUpdated;
 use App\Models\GameMatch;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -28,57 +29,55 @@ class MatchController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    /**
- * Store a newly created resource in storage.
- */
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'name'     => ['required', 'string', 'max:255'],
-        'sport'    => ['required', 'string', 'max:50'],
-        'league'   => ['nullable', 'string', 'max:255'],
-        'stage'    => ['nullable', 'string', 'max:255'],
-        'venue'    => ['nullable', 'string', 'max:255'],
-        'team_a'   => ['nullable', 'string', 'max:255'],
-        'team_b'   => ['nullable', 'string', 'max:255'],
-        'color_a'  => ['nullable', 'string', 'max:20'],
-        'color_b'  => ['nullable', 'string', 'max:20'],
-        'team_a_logo' => ['nullable', 'image', 'max:2048'],
-        'team_b_logo' => ['nullable', 'image', 'max:2048'],
-        'duration' => ['required', 'integer', 'min:1'],
-    ]);
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name'     => ['required', 'string', 'max:255'],
+            'sport'    => ['required', 'string', 'max:50'],
+            'league'   => ['nullable', 'string', 'max:255'],
+            'stage'    => ['nullable', 'string', 'max:255'],
+            'venue'    => ['nullable', 'string', 'max:255'],
+            'team_a'   => ['nullable', 'string', 'max:255'],
+            'team_b'   => ['nullable', 'string', 'max:255'],
+            'color_a'  => ['nullable', 'string', 'max:20'],
+            'color_b'  => ['nullable', 'string', 'max:20'],
+            'team_a_logo' => ['nullable', 'image', 'max:2048'],
+            'team_b_logo' => ['nullable', 'image', 'max:2048'],
+            'duration' => ['required', 'integer', 'min:1'],
+        ]);
 
-    $matchData = [
-        'user_id'          => auth()->id(),
-        'name'             => $validated['name'],
-        'sport'            => $validated['sport'],
-        'league'           => $validated['league'] ?? null,
-        'stage'            => $validated['stage'] ?? null,
-        'venue'            => $validated['venue'] ?? null,
-        'team_a'           => $validated['team_a'] ?? null,
-        'team_b'           => $validated['team_b'] ?? null,
-        'team_a_color'     => $validated['color_a'] ?? '#7C3AED',
-        'team_b_color'     => $validated['color_b'] ?? '#2563EB',
-        'duration_minutes' => $validated['duration'],
-        'status'           => 'scheduled',
-        'score_a'          => 0,
-        'score_b'          => 0,
-    ];
+        $matchData = [
+            'user_id'          => auth()->id(),
+            'name'             => $validated['name'],
+            'sport'            => $validated['sport'],
+            'league'           => $validated['league'] ?? null,
+            'stage'            => $validated['stage'] ?? null,
+            'venue'            => $validated['venue'] ?? null,
+            'team_a'           => $validated['team_a'] ?? null,
+            'team_b'           => $validated['team_b'] ?? null,
+            'team_a_color'     => $validated['color_a'] ?? '#7C3AED',
+            'team_b_color'     => $validated['color_b'] ?? '#2563EB',
+            'duration_minutes' => $validated['duration'],
+            'status'           => 'scheduled',
+            'score_a'          => 0,
+            'score_b'          => 0,
+        ];
 
-    if ($request->hasFile('team_a_logo')) {
-        $matchData['team_a_logo'] = $request->file('team_a_logo')->store('matches/logos', 'public');
+        if ($request->hasFile('team_a_logo')) {
+            $matchData['team_a_logo'] = $request->file('team_a_logo')->store('matches/logos', 'public');
+        }
+
+        if ($request->hasFile('team_b_logo')) {
+            $matchData['team_b_logo'] = $request->file('team_b_logo')->store('matches/logos', 'public');
+        }
+
+        $match = GameMatch::create($matchData);
+
+        return redirect()
+            ->route('matches.control', $match)
+            ->with('success', 'Broadcast event created successfully.');
     }
 
-    if ($request->hasFile('team_b_logo')) {
-        $matchData['team_b_logo'] = $request->file('team_b_logo')->store('matches/logos', 'public');
-    }
-
-    $match = GameMatch::create($matchData);
-
-    return redirect()
-        ->route('matches.control', $match)
-        ->with('success', 'Broadcast event created successfully.');
-}
     /**
      * Display the specified resource.
      */
@@ -141,6 +140,11 @@ public function store(Request $request)
      *   - timer   { type: 'timer', clock_seconds: int, timer_status: string }
      *   - status  { type: 'status', status: string }
      *   - period  { type: 'period', period: string }
+     *
+     * Every successful update also broadcasts a MatchUpdated event on the
+     * match's public `scoreboard.{id}` channel so the OBS overlay reflects
+     * the change immediately, without needing a manual browser-source
+     * refresh.
      */
     public function controlUpdate(Request $request, GameMatch $match)
     {
@@ -180,9 +184,23 @@ public function store(Request $request)
             ]),
         };
 
+        $match = $match->fresh(['teamA', 'teamB']);
+
+        // Broadcast a minimal, type-specific payload rather than the whole
+        // match model — keeps the socket message small and means the
+        // overlay only has to reconcile the field that actually changed.
+        $broadcastPayload = match ($validated['type']) {
+            'score'  => ['team' => $validated['team'], 'value' => $validated['value']],
+            'timer'  => ['clock_seconds' => $match->clock_seconds, 'timer_status' => $match->timer_status],
+            'status' => ['status' => $match->status],
+            'period' => ['period' => $match->period],
+        };
+
+        broadcast(new MatchUpdated($match, $validated['type'], $broadcastPayload));
+
         return response()->json([
             'success' => true,
-            'match'   => $match->fresh(['teamA', 'teamB']),
+            'match'   => $match,
         ]);
     }
 }

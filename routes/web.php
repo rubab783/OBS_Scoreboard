@@ -58,6 +58,9 @@ Route::middleware('auth')->prefix('profile')->group(function () {
     Route::patch('/', [ProfileController::class, 'update'])
         ->name('profile.update');
 
+    Route::patch('/theme', [ProfileController::class, 'updateTheme'])
+        ->name('profile.theme');
+
     Route::put('/password', [ProfileController::class, 'updatePassword'])
         ->name('profile.password');
 
